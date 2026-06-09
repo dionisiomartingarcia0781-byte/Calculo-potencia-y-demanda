@@ -1,0 +1,752 @@
+/* =========================================================
+   CALCULADORA DE CARGA TÉRMICA - ESTILOS
+   ========================================================= */
+
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #dbeafe;
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --danger: #dc2626;
+  --danger-light: #fef2f2;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,0.07), 0 10px 15px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--gray-100);
+  color: var(--gray-900);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   LAYOUT GENERAL
+   ========================================================= */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.app-subtitle {
+  margin: 0.5rem 0 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.app-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  width: 100%;
+}
+
+.app-footer {
+  background: var(--gray-800);
+  color: var(--gray-400);
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+/* =========================================================
+   PANELES
+   ========================================================= */
+
+.panel {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  border-bottom: 2px solid var(--gray-200);
+  padding-bottom: 0.75rem;
+}
+
+.panel h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+/* =========================================================
+   SELECTOR DE MÉTODO
+   ========================================================= */
+
+.metodo-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.metodo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.75rem;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.metodo-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.metodo-btn.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.metodo-icon {
+  font-size: 1.5rem;
+}
+
+.metodo-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.metodo-desc {
+  font-size: 0.7rem;
+  color: var(--gray-500);
+}
+
+/* Rendimiento input group */
+.rendimiento-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 4px;
+}
+
+.rendimiento-input-group input {
+  flex: 1;
+  margin-top: 0;
+}
+
+.rendimiento-sugerido {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Input note */
+.input-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* Info extra para combustibles */
+.info-extra {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--gray-50);
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.info-extra p {
+  margin: 0.2rem 0;
+  color: var(--gray-600);
+}
+
+/* =========================================================
+   INPUTS GRID
+   ========================================================= */
+
+.grid-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.input-group {
+  padding: 0.5rem 0;
+}
+
+.input-group h3 {
+  margin-top: 0;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.input-group input,
+.input-group select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  background: white;
+  color: var(--gray-900);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.input-hint {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin: 0 0 0.75rem;
+}
+
+/* Ciudad info */
+.ciudad-info {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--primary-light);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.ciudad-info p {
+  margin: 0.25rem 0;
+  color: var(--gray-700);
+}
+
+/* =========================================================
+   MESES SELECTOR
+   ========================================================= */
+
+.meses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.mes-btn {
+  padding: 0.5rem 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--gray-600);
+}
+
+.mes-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.mes-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* =========================================================
+   RESUMEN
+   ========================================================= */
+
+.resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumen-card {
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid var(--gray-200);
+}
+
+.resumen-original {
+  background: var(--gray-50);
+  border-color: var(--gray-200);
+}
+
+.resumen-corregido {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+.resumen-temporada {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.resumen-card h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-500);
+}
+
+.resumen-valor {
+  margin-bottom: 0.5rem;
+}
+
+.valor-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  display: block;
+}
+
+.resumen-corregido .valor-num {
+  color: var(--success);
+}
+
+.valor-unidad {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  display: block;
+  margin-top: -4px;
+}
+
+.resumen-card p {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.resumen-detalle {
+  font-size: 0.8rem !important;
+  color: var(--gray-400) !important;
+}
+
+/* =========================================================
+   POTENCIAS
+   ========================================================= */
+
+.potencias-section {
+  margin-top: 1rem;
+}
+
+.potencias-section h3 {
+  margin-bottom: 1rem;
+}
+
+.potencias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.potencia-card {
+  padding: 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: var(--gray-50);
+}
+
+.potencia-card.potencia-max {
+  border-color: var(--danger);
+  background: var(--danger-light);
+}
+
+.potencia-card.potencia-min {
+  border-color: var(--warning);
+  background: var(--warning-light);
+}
+
+.potencia-tipo {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-500);
+  margin-bottom: 0.75rem;
+}
+
+.potencia-valores {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+.potencia-valor {
+  text-align: center;
+}
+
+.potencia-valor.corregido .potencia-num {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.potencia-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  margin-bottom: 2px;
+}
+
+.potencia-num {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.potencia-nota {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+.factor-correccion {
+  padding: 0.75rem 1rem;
+  background: var(--gray-100);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.factor-correccion strong {
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.factor-detalle {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  font-family: 'Consolas', monospace;
+}
+
+/* =========================================================
+   TABLA MENSUAL
+   ========================================================= */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.tabla-mensual {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabla-mensual th {
+  background: var(--gray-100);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gray-700);
+  border-bottom: 2px solid var(--gray-300);
+  white-space: nowrap;
+}
+
+.tabla-mensual td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+
+.tabla-mensual tbody tr:hover {
+  background: var(--gray-50);
+}
+
+.tabla-mensual .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabla-mensual tfoot td {
+  background: var(--gray-50);
+  border-top: 2px solid var(--gray-300);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   GRÁFICA DE BARRAS
+   ========================================================= */
+
+.barras-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 300px;
+  padding: 1rem 0.5rem 0;
+  border-bottom: 2px solid var(--gray-300);
+}
+
+.barra-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.barra-label-mes {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.barra-track {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 20px;
+}
+
+.barra-fill {
+  width: 70%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+  position: absolute;
+  bottom: 0;
+}
+
+.barra-valor {
+  position: absolute;
+  top: -18px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  white-space: nowrap;
+}
+
+.barra-gd {
+  margin-top: 4px;
+  font-size: 0.65rem;
+  color: var(--gray-400);
+}
+
+.barra-wrapper.inactivo .barra-fill {
+  width: 40%;
+  opacity: 0.5;
+}
+
+.grafica-leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+
+.leyenda-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* =========================================================
+   BOTÓN PDF
+   ========================================================= */
+
+.pdf-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.btn-pdf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+  min-width: 320px;
+}
+
+.btn-pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.btn-pdf:active {
+  transform: translateY(0);
+}
+
+.btn-pdf-icon {
+  font-size: 2rem;
+}
+
+.btn-pdf-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-pdf-desc {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+/* =========================================================
+   DATOS CLIMÁTICOS
+   ========================================================= */
+
+.fuente {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin: -0.75rem 0 1rem;
+  font-style: italic;
+}
+
+.clima-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.clima-item {
+  padding: 0.75rem;
+  background: var(--gray-50);
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid var(--gray-200);
+}
+
+.clima-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  margin-bottom: 4px;
+}
+
+.clima-valor {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .app-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .app-content {
+    padding: 1rem;
+  }
+  
+  .grid-inputs {
+    grid-template-columns: 1fr;
+  }
+  
+  .meses-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .resumen-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .potencias-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .barras-container {
+    height: 200px;
+  }
+  
+  .clima-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
